@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Wanderly — Journeys designed around you</title>
+<meta name="description" content="Discover extraordinary destinations, experience local cultures and create unforgettable journeys with Wanderly.">
+<meta property="og:title" content="Wanderly — Journeys designed around you">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Yatra+One&family=Mukta:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#faf6ef;--ink:#14202b;--coral:#ff5a4e;--lag:#0fa3a3;--sand:#efe4cf;--card:#fff;--mute:#5c6770;--line:#14202b26;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0e1519;--ink:#f3ede2;--sand:#18232a;--card:#16222a;--mute:#9bacb6;--line:#f3ede233}}
+:root[data-theme="dark"]{--bg:#0e1519;--ink:#f3ede2;--sand:#18232a;--card:#16222a;--mute:#9bacb6;--line:#f3ede233}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-behavior:smooth;scroll-padding-top:calc(90px + env(safe-area-inset-top,0px))}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 17px/1.65 Mukta,system-ui,sans-serif;overflow-x:hidden}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--coral);outline-offset:3px}
+.wrap{max-width:1240px;margin:0 auto;padding:0 24px}
+h1,h2,h3{font-family:'Yatra One',Impact,sans-serif;font-weight:800;line-height:.98;letter-spacing:-.03em;margin:0}
+h2{font-size:clamp(40px,6.4vw,92px)}
+section{padding:110px 0}
+.e{color:var(--coral);font-style:normal}
+.kick{font-weight:700;letter-spacing:.16em;text-transform:uppercase;font-size:12.5px;color:var(--lag);margin-bottom:16px}
+.sub{max-width:540px;color:var(--mute);font-size:19px;margin:20px 0 0}
+.img{width:100%;height:100%;object-fit:cover;display:block}.ph{background:linear-gradient(135deg,#d8c9a8,#b9cfc9)}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:16px 30px;border-radius:999px;border:2px solid var(--coral);background:var(--coral);color:#fff;font:700 15px Mukta,sans-serif;text-decoration:none;cursor:pointer;transition:background .25s,color .25s,box-shadow .25s}
+.btn:hover{box-shadow:0 12px 30px #ff5a4e66}
+.btn.g{background:transparent;border-color:#fff;color:#fff}.btn.g:hover{background:#fff;color:#14202b;box-shadow:none}
+.btn.d{background:var(--ink);border-color:var(--ink);color:var(--bg)}
+.mag{will-change:transform;transition:transform .25s cubic-bezier(.2,.8,.2,1),background .25s,color .25s,box-shadow .25s}
+/* cursor + progress */
+.cur{position:fixed;left:0;top:0;z-index:99;width:16px;height:16px;margin:-8px 0 0 -8px;border-radius:50%;background:var(--coral);pointer-events:none;display:grid;place-items:center;color:#fff;font:700 11px Mukta;letter-spacing:.06em;text-transform:uppercase;transition:width .25s,height .25s,margin .25s,opacity .2s;mix-blend-mode:normal}
+.cur.big{width:84px;height:84px;margin:-42px 0 0 -42px}
+@media(hover:none),(prefers-reduced-motion:reduce){.cur{display:none}}
+.prog{position:fixed;top:0;left:0;height:4px;background:var(--coral);width:var(--p,0%);z-index:70}
+/* nav */
+header{position:fixed;top:14px;left:0;right:0;z-index:60;padding-top:env(safe-area-inset-top,0px)}
+.np{display:flex;justify-content:space-between;align-items:center;gap:14px;max-width:1180px;margin:0 auto;padding:10px 12px 10px 24px;border-radius:999px;background:color-mix(in srgb,var(--bg) 78%,transparent);backdrop-filter:blur(16px);border:1px solid #ffffff40;box-shadow:0 10px 30px #0002;position:relative}
+.logo{display:flex;align-items:center;gap:8px;font:800 24px 'Yatra One',sans-serif;letter-spacing:-.04em;text-decoration:none}
+.np ul{display:flex;gap:26px;list-style:none;margin:0;padding:0;font-weight:500;font-size:15px}
+.np ul a{text-decoration:none;position:relative}
+.np ul a::after{content:"";position:absolute;left:0;bottom:-4px;height:2px;width:100%;background:var(--coral);transform:scaleX(0);transform-origin:left;transition:transform .3s}
+.np ul a:hover::after{transform:scaleX(1)}
+.mb{display:none}
+@media(max-width:1000px){.mb{display:inline-flex}.np ul{display:none;position:absolute;top:70px;left:0;right:0;flex-direction:column;background:var(--bg);padding:22px 26px;border-radius:26px;box-shadow:0 20px 40px #0003;gap:16px;font-size:19px}.np ul.open{display:flex}.nb{display:none}}
+/* hero */
+.hero{position:relative;min-height:100svh;color:#fff;display:flex;flex-direction:column;justify-content:flex-end;padding:130px 0 28px;overflow:hidden;background:#0a141a}
+.hero::before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,#0a141ad0,#0a141a40 42%,#0a141af2)}
+.sl{position:absolute;inset:0;opacity:0;transition:opacity 1.4s}.sl.on{opacity:1}.sl.on .img{animation:kb 10s ease-out forwards}
+@keyframes kb{from{transform:scale(1)}to{transform:scale(1.14)}}
+.hero .wrap{position:relative;z-index:2;width:100%}
+.hr{display:flex;justify-content:space-between;align-items:flex-end;gap:32px;flex-wrap:wrap}
+.hero h1{font-size:clamp(46px,8.4vw,128px);max-width:900px;text-shadow:0 4px 40px #0008}
+.hero p.l{font-size:clamp(17px,1.6vw,21px);max-width:520px;margin:22px 0 28px;color:#fff;text-shadow:0 2px 20px #0009}
+.cta{display:flex;gap:14px;flex-wrap:wrap}
+.pager{display:grid;gap:6px;min-width:190px}
+.pager button{display:grid;grid-template-columns:34px 1fr;align-items:center;text-align:left;background:none;border:0;color:#fff9;font:700 14px Mukta;cursor:pointer;padding:6px 0;position:relative}
+.pager button[aria-current="true"]{color:#fff}.pager i{font-style:normal;font-size:12px}
+.pager button::after{content:"";position:absolute;left:34px;right:0;bottom:2px;height:2px;background:#fff3}
+.pager button[aria-current="true"]::before{content:"";position:absolute;left:34px;bottom:2px;height:2px;background:var(--coral);z-index:1;animation:fill 6.5s linear forwards}
+@keyframes fill{from{width:0}to{width:calc(100% - 34px)}}
+@media(max-width:700px){.pager{display:flex;min-width:0}.pager button{grid-template-columns:1fr}.pager i,.pager span{display:none}.pager button{width:34px;height:6px;padding:0;background:#fff4;border-radius:4px}.pager button[aria-current="true"]{background:var(--coral)}.pager button::after,.pager button::before{display:none!important}}
+.sbar{display:grid;grid-template-columns:1.5fr 1fr 1fr .7fr auto;gap:12px;align-items:end;background:#ffffff1f;backdrop-filter:blur(20px);border:1px solid #ffffff55;border-radius:28px;padding:16px;margin-top:30px}
+@media(max-width:900px){.sbar{grid-template-columns:1fr 1fr}.sbar .f1,.sbar button{grid-column:1/-1}}
+.sbar label,.fm label{display:block;font:700 11px Mukta;letter-spacing:.12em;text-transform:uppercase;margin-bottom:5px}
+.sbar label{color:#fffc}
+.sbar input{width:100%;font:500 16px Mukta;color:#fff;background:#ffffff22;border:1px solid #ffffff55;border-radius:14px;padding:12px 14px;color-scheme:dark}
+.sbar input::placeholder{color:#ffffffaa}.sbar input:focus{outline:none;border-color:#fff}
+.er{color:#ff8a7d;font-weight:700;font-size:12.5px;min-height:1px;margin-top:3px}
+/* words */
+.wd span{display:inline-block;margin-right:.26em;opacity:0;transform:translateY(70%) rotate(5deg);transition:opacity .8s,transform .9s cubic-bezier(.2,.8,.2,1)}
+.wd.in span{opacity:1;transform:none}
+/* accordion */
+.acc{display:flex;gap:12px;height:min(640px,78vh);margin-top:50px}
+.pn{position:relative;flex:1;border-radius:30px;overflow:hidden;cursor:pointer;transition:flex .8s cubic-bezier(.2,.8,.2,1);color:#fff;background:#222}
+.pn.on{flex:6}
+.pn .img{position:absolute;inset:0;transition:transform 1.2s}.pn:hover .img{transform:scale(1.06)}
+.pn::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,#0000 35%,#0a141ae6)}
+.vt{position:absolute;left:50%;bottom:28px;z-index:2;writing-mode:vertical-rl;transform:translateX(-50%) rotate(180deg);font:800 28px 'Yatra One';letter-spacing:-.01em;white-space:nowrap;transition:opacity .3s}
+.pn.on .vt{opacity:0}
+.pc{position:absolute;left:0;right:0;bottom:0;z-index:2;padding:30px;opacity:0;transform:translateY(24px);transition:opacity .5s,transform .6s;pointer-events:none}
+.pn.on .pc{opacity:1;transform:none;pointer-events:auto;transition-delay:.25s}
+.pc h3{font-size:clamp(34px,4.4vw,62px)}.pc small{font-weight:700;letter-spacing:.14em;text-transform:uppercase;font-size:12px;color:#ffd2cc}
+.pc p{margin:10px 0 18px;max-width:440px;color:#fff}
+.pc .cta .btn{padding:12px 22px;font-size:14px}
+@media(max-width:760px){.acc{flex-direction:column;height:auto}.pn{flex:none;height:84px;transition:height .7s cubic-bezier(.2,.8,.2,1)}.pn.on{height:430px}.vt{writing-mode:horizontal-tb;transform:none;left:24px;bottom:auto;top:24px}}
+/* experiences */
+.eg{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:230px;gap:16px;margin-top:50px}
+.tilt{transition:transform .2s ease-out;will-change:transform}
+.ex{position:relative;border-radius:26px;overflow:hidden;color:#fff;display:block;text-decoration:none;height:100%}
+.ex .img{position:absolute;inset:0;transition:transform .9s}.ex:hover .img{transform:scale(1.1)}
+.ex::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,#0000 30%,#0a141aee)}
+.ex div{position:absolute;left:20px;right:20px;bottom:18px;z-index:2}
+.ex h3{font-size:clamp(22px,2.4vw,34px)}.ex span{display:block;max-height:0;opacity:0;overflow:hidden;transition:max-height .5s,opacity .5s;font-size:15px}
+.ex:hover span,.ex:focus-visible span{max-height:60px;opacity:1}
+.eg>:nth-child(1){grid-column:span 2;grid-row:span 2}.eg>:nth-child(4){grid-row:span 2}.eg>:nth-child(6){grid-column:span 2}
+@media(max-width:860px){.eg{grid-template-columns:1fr 1fr;grid-auto-rows:200px}.eg>:nth-child(n){grid-column:auto;grid-row:auto}.eg>:nth-child(1){grid-column:span 2}.ex span{max-height:60px;opacity:1}}
+/* packages */
+.bar{display:flex;gap:12px;flex-wrap:wrap;justify-content:space-between;margin:44px 0 30px}
+.ch{display:flex;gap:8px;flex-wrap:wrap}
+.chip{border:2px solid var(--ink);background:none;color:var(--ink);padding:8px 18px;border-radius:999px;font:700 13px Mukta;cursor:pointer;transition:background .2s,color .2s}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--bg)}
+select{font:600 14px Mukta;background:var(--card);color:var(--ink);border:2px solid var(--ink);border-radius:12px;padding:9px 12px}
+.pk{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
+@media(max-width:980px){.pk{grid-template-columns:1fr 1fr}}@media(max-width:620px){.pk{grid-template-columns:1fr}}
+.cd{background:var(--card);border-radius:28px;overflow:hidden;box-shadow:0 14px 40px #14202b1a;height:100%;display:flex;flex-direction:column}
+.cd .im{aspect-ratio:4/3;overflow:hidden;position:relative}.cd .im .img{transition:transform .9s}.cd:hover .im .img{transform:scale(1.08)}
+.dur{position:absolute;top:14px;left:14px;background:#fffffff0;color:#14202b;border-radius:999px;padding:4px 14px;font-weight:700;font-size:13px}
+.cd .bd{padding:22px;display:flex;flex-direction:column;gap:10px;flex:1}
+.cd small{font-weight:700;letter-spacing:.12em;text-transform:uppercase;font-size:11.5px;color:var(--lag)}
+.cd h3{font-size:28px}.cd p{margin:0;color:var(--mute);font-size:15px}
+.ac{display:flex;gap:6px;flex-wrap:wrap}.ac span{font-size:12.5px;background:var(--sand);padding:3px 12px;border-radius:999px}
+.pr{display:flex;justify-content:space-between;align-items:center;margin-top:auto;padding-top:14px;border-top:1px solid var(--line)}
+.pr em{display:block;font-size:11px;font-style:normal;color:var(--mute)}.pr strong{font:800 28px 'Yatra One'}
+.empty{padding:44px;border:2px dashed var(--line);border-radius:24px;text-align:center}
+.nt{font-size:13.5px;color:var(--mute);margin-top:26px}
+/* modal */
+.md{position:fixed;inset:0;z-index:90;background:#0a141acc;backdrop-filter:blur(6px);display:grid;place-items:center;padding:20px;animation:fade .3s}
+@keyframes fade{from{opacity:0}}
+.mb2{background:var(--bg);border-radius:32px;max-width:900px;width:100%;max-height:92vh;overflow:auto;display:grid;grid-template-columns:1fr 1fr;animation:pop .45s cubic-bezier(.2,.8,.2,1)}
+@keyframes pop{from{transform:translateY(30px) scale(.96);opacity:0}}
+.mb2 .im{min-height:320px}.mb2 .tx{padding:30px;position:relative}
+.mb2 ol{padding-left:18px;color:var(--mute);margin:14px 0 20px}
+.x{position:absolute;top:14px;right:14px;width:42px;height:42px;border-radius:50%;border:0;background:var(--sand);color:var(--ink);font-size:18px;cursor:pointer}
+@media(max-width:720px){.mb2{grid-template-columns:1fr}.mb2 .im{min-height:200px}}
+/* trip builder */
+.tb{display:grid;grid-template-columns:1.1fr .9fr;gap:36px;margin-top:50px;align-items:start}
+@media(max-width:940px){.tb{grid-template-columns:1fr}}
+.pick{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:560px){.pick{grid-template-columns:1fr 1fr}}
+.pi{position:relative;aspect-ratio:3/4;border-radius:22px;overflow:hidden;border:3px solid transparent;padding:0;cursor:pointer;color:#fff;background:#222;transition:transform .3s,border-color .3s}
+.pi:hover{transform:translateY(-6px)}.pi[aria-pressed="true"]{border-color:var(--coral)}
+.pi .img{position:absolute;inset:0;transition:transform .8s}.pi:hover .img{transform:scale(1.1)}
+.pi::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,#0000 45%,#0a141ae6)}
+.pi b{position:absolute;left:12px;bottom:10px;z-index:2;font:800 20px 'Yatra One';text-align:left}
+.pi i{position:absolute;top:10px;right:10px;z-index:2;width:30px;height:30px;border-radius:50%;background:#fffc;color:#14202b;display:grid;place-items:center;font-style:normal;font-weight:800;transform:scale(0);transition:transform .35s cubic-bezier(.3,1.6,.5,1)}
+.pi[aria-pressed="true"] i{transform:scale(1);background:var(--coral);color:#fff}
+.tl{margin:26px 0 0;padding:0;list-style:none;position:relative}
+.tl::before{content:"";position:absolute;left:19px;top:10px;bottom:10px;border-left:2px dashed var(--coral)}
+.tl li{display:grid;grid-template-columns:40px 1fr auto;gap:14px;align-items:center;padding:8px 0;animation:slide .5s cubic-bezier(.2,.8,.2,1) both;position:relative}
+@keyframes slide{from{opacity:0;transform:translateX(-24px)}}
+.tl .n{width:40px;height:40px;border-radius:50%;background:var(--coral);color:#fff;display:grid;place-items:center;font-weight:800}
+.tl b{font:800 22px 'Yatra One'}.tl small{display:block;color:var(--mute)}
+.tl button{border:0;background:var(--sand);color:var(--ink);width:34px;height:34px;border-radius:50%;cursor:pointer;margin-left:4px}
+.rs{font-weight:700;color:var(--lag);margin:14px 0 0}
+.fm .fg{display:grid;grid-template-columns:1fr 1fr;gap:16px}.fm .f{grid-column:1/-1}
+@media(max-width:560px){.fm .fg{grid-template-columns:1fr}}
+.fm label{color:var(--mute)}
+.fm input,.fm select,.fm textarea{width:100%;font:500 16px Mukta;color:var(--ink);background:var(--card);border:2px solid var(--line);border-radius:14px;padding:12px 14px}
+.fm input:focus,.fm select:focus,.fm textarea:focus{outline:none;border-color:var(--coral)}
+.fm .er{color:#d23b2e}
+.fb{margin-top:16px;padding:14px 18px;border-radius:14px;background:var(--sand)}
+/* why */
+.wy{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
+@media(max-width:860px){.wy{grid-template-columns:1fr}}
+.wp{position:sticky;top:100px;aspect-ratio:4/5;border-radius:36px;overflow:hidden}
+.wp .img{position:absolute;inset:0;opacity:0;transition:opacity .9s,transform 1.4s;transform:scale(1.08)}.wp .img.on{opacity:1;transform:none}
+.wi{padding:22px 0;border-bottom:1px solid var(--line);cursor:pointer}
+.wi h3{font-size:clamp(24px,3vw,38px);display:flex;gap:16px;align-items:baseline;transition:color .3s,transform .3s}
+.wi h3 i{font:700 14px Mukta;color:var(--coral);font-style:normal}
+.wi p{margin:0;max-height:0;overflow:hidden;opacity:0;color:var(--mute);transition:max-height .5s,opacity .5s,margin .5s}
+.wi.on h3{color:var(--coral);transform:translateX(10px)}.wi.on p{max-height:90px;opacity:1;margin-top:10px}
+/* stories */
+.sg{display:grid;grid-template-columns:1.25fr 1fr;gap:28px;margin-top:50px}
+@media(max-width:860px){.sg{grid-template-columns:1fr}}
+.sf{display:flex;flex-direction:column;gap:14px;text-decoration:none}
+.sf .im,.sl2 .im{border-radius:26px;overflow:hidden}.sf .im{height:430px}
+.sf .img,.sl2 .img{transition:transform 1s}.sf:hover .img,.sl2:hover .img{transform:scale(1.07)}
+.sr{display:flex;flex-direction:column;gap:22px}
+.sl2{display:grid;grid-template-columns:150px 1fr;gap:18px;text-decoration:none;align-items:center}.sl2 .im{height:130px}
+.cat{font-weight:700;letter-spacing:.14em;text-transform:uppercase;font-size:11.5px;color:var(--coral)}
+.sg h3{font-size:clamp(24px,3vw,40px)}.sl2 h3{font-size:22px}
+.rd{font-weight:700;display:inline-flex;gap:8px;transition:gap .3s}.sf:hover .rd,.sl2:hover .rd{gap:16px}
+/* gallery */
+.gg{columns:3 260px;column-gap:16px;margin-top:50px}
+.gg button{display:block;width:100%;margin:0 0 16px;padding:0;border:0;border-radius:22px;overflow:hidden;cursor:zoom-in;background:#222;position:relative;clip-path:inset(0 0 100% 0 round 22px);transition:clip-path 1s cubic-bezier(.2,.8,.2,1)}
+.gg button.in{clip-path:inset(0 0 0 0 round 22px)}
+.gg .img{transition:transform .9s}.gg button:hover .img{transform:scale(1.08)}
+.lb{position:fixed;inset:0;z-index:95;background:#0a141af2;display:grid;place-items:center;padding:20px;animation:fade .3s}
+.lb .box{width:min(980px,92vw);height:min(640px,70vh);border-radius:24px;overflow:hidden}
+.lb p{color:#fff;text-align:center;margin:12px 0 0}
+.lb button{position:absolute;width:50px;height:50px;border-radius:50%;border:0;background:#fff;color:#14202b;font-size:22px;cursor:pointer}
+/* contact */
+.ct{position:relative;padding:0;background:#0a141a;color:#fff;overflow:hidden}
+.ct .bgi{position:absolute;inset:-8% 0;opacity:.55}
+.ct::before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(90deg,#0a141af2,#0a141a99)}
+.ct .wrap{position:relative;z-index:2;display:grid;grid-template-columns:1fr 1fr;gap:56px;padding-top:110px;padding-bottom:110px}
+@media(max-width:900px){.ct .wrap{grid-template-columns:1fr}}
+.ct .kick{color:#7ff0e6}.ct h2 .e{color:#ff9a90}
+.ct ul{list-style:none;padding:0;margin:24px 0;color:#ffffffcc;display:grid;gap:8px}
+.gl{background:#ffffff1c;backdrop-filter:blur(20px);border:1px solid #ffffff44;border-radius:28px;padding:26px}
+.gl h3{font-size:30px;margin-bottom:12px}.gl+.gl{margin-top:18px}
+.ct .fm label{color:#fffd}
+.ct .fm input,.ct .fm select,.ct .fm textarea{background:#ffffff22;border-color:#ffffff55;color:#fff;color-scheme:dark}
+.ct .fm ::placeholder{color:#ffffffaa}.ct .fm .er{color:#ffb4ab}.ct .fb{background:#00000055}
+.nlr{display:flex;gap:10px;align-items:flex-end;flex-wrap:wrap}.nlr .fm{flex:1;min-width:180px}
+/* footer */
+footer{background:#0a141a;color:#f3ede2;padding:80px 0 26px;overflow:hidden}
+.fg4{display:grid;grid-template-columns:1.5fr 1fr 1fr 1.2fr;gap:34px}
+@media(max-width:860px){.fg4{grid-template-columns:1fr 1fr}}
+footer h4{margin:0 0 14px;color:#ff9a90;font:700 12px Mukta;letter-spacing:.14em;text-transform:uppercase}
+footer ul{list-style:none;padding:0;margin:0;display:grid;gap:8px}footer a{text-decoration:none;color:#f3ede2cc}footer a:hover{color:#fff;text-decoration:underline}
+.mega{font:800 clamp(80px,21vw,330px)/.8 'Yatra One',sans-serif;letter-spacing:-.06em;margin:56px 0 10px;background:linear-gradient(90deg,#ff5a4e,#0fa3a3);-webkit-background-clip:text;background-clip:text;color:transparent;opacity:.9;user-select:none}
+.cr{font-size:12px;line-height:1.7;color:#9bacb6;margin:0 0 14px}
+.fb2{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:13px;color:#9bacb6;border-top:1px solid #ffffff2e;padding-top:18px}
+.rv{opacity:0;transform:translateY(40px);transition:opacity .9s,transform .9s cubic-bezier(.2,.8,.2,1)}.rv.in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation:none!important;transition:none!important}.rv,.wd span{opacity:1;transform:none}.gg button{clip-path:none}}
+
+/* ===== Indian theme ===== */
+:root{--bg:#fff4dc;--ink:#2a1208;--coral:#c2185b;--lag:#0a7580;--sand:#ffe6b8;--card:#fffaf0;--mute:#6a4b3a;--line:#2a120830;--gold:#ffb703}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1a0d0e;--ink:#fbe9cf;--sand:#261415;--card:#2a1718;--mute:#c9ad98;--line:#fbe9cf33}}
+:root[data-theme="dark"]{--bg:#1a0d0e;--ink:#fbe9cf;--sand:#261415;--card:#2a1718;--mute:#c9ad98;--line:#fbe9cf33}
+html{font-synthesis:none}
+h1,h2,h3{font-weight:400;letter-spacing:0;line-height:1.08}
+section{position:relative}
+.prog{background:linear-gradient(90deg,#ff9f1c,#c2185b)}
+.btn.g:hover{color:#2a1208}
+.kick{color:var(--lag);font-weight:700;letter-spacing:.1em}
+.kick::before{content:"❁ ";color:var(--coral)}
+.hi{font:400 28px 'Yatra One',serif;color:var(--coral);margin:0 0 14px}.hi span{font:500 15px Mukta;color:var(--mute);letter-spacing:.04em}
+.pat1{background-color:var(--bg);background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='90' height='90' viewBox='0 0 90 90'%3E%3Cg fill='none' stroke='%236b0f1a' stroke-opacity='.14' stroke-width='1.6' stroke-linecap='round'%3E%3Cpath d='M30 8c14 0 22 12 18 26-3 10-12 16-20 14-9-2-12-12-6-18 4-4 10-3 11 2 1 4-3 6-6 5'/%3E%3Ccircle cx='46' cy='20' r='2'/%3E%3Cpath d='M70 52c10 0 15 8 12 18-2 7-9 11-14 9-6-2-8-9-4-13 3-3 7-2 8 1'/%3E%3C/g%3E%3C/svg%3E")}
+.pat3{background-color:var(--sand);background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='44' height='44' viewBox='0 0 44 44'%3E%3Cg fill='%23ff8f1f' fill-opacity='.2'%3E%3Ccircle cx='22' cy='12' r='4.5'/%3E%3Ccircle cx='32' cy='22' r='4.5'/%3E%3Ccircle cx='22' cy='32' r='4.5'/%3E%3Ccircle cx='12' cy='22' r='4.5'/%3E%3C/g%3E%3Ccircle cx='22' cy='22' r='3' fill='%23c2185b' fill-opacity='.3'/%3E%3C/svg%3E");background-size:44px}
+.mar{background-color:#5e0f1d;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='64' viewBox='0 0 64 64'%3E%3Cg fill='none' stroke='%23ffb703' stroke-opacity='.3' stroke-width='1.4'%3E%3Cpath d='M32 2l12 12-12 12-12-12zM2 32l12-12 12 12-12 12zM62 32L50 20 38 32l12 12zM32 62L20 50l12-12 12 12z'/%3E%3Ccircle cx='32' cy='32' r='6'/%3E%3Cpath d='M0 0l8 8M64 0l-8 8M0 64l8-8M64 64l-8-8'/%3E%3C/g%3E%3C/svg%3E")}
+.pea{background-color:#0a6670;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='64' viewBox='0 0 64 64'%3E%3Cg fill='none' stroke='%23ffb703' stroke-opacity='.3' stroke-width='1.4'%3E%3Cpath d='M32 2l12 12-12 12-12-12zM2 32l12-12 12 12-12 12zM62 32L50 20 38 32l12 12zM32 62L20 50l12-12 12 12z'/%3E%3Ccircle cx='32' cy='32' r='6'/%3E%3Cpath d='M0 0l8 8M64 0l-8 8M0 64l8-8M64 64l-8-8'/%3E%3C/g%3E%3C/svg%3E")}
+.ind{background-color:#1b2a6b;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='90' height='90' viewBox='0 0 90 90'%3E%3Cg fill='none' stroke='%23ffb703' stroke-opacity='.2' stroke-width='1.6' stroke-linecap='round'%3E%3Cpath d='M30 8c14 0 22 12 18 26-3 10-12 16-20 14-9-2-12-12-6-18 4-4 10-3 11 2 1 4-3 6-6 5'/%3E%3Ccircle cx='46' cy='20' r='2'/%3E%3Cpath d='M70 52c10 0 15 8 12 18-2 7-9 11-14 9-6-2-8-9-4-13 3-3 7-2 8 1'/%3E%3C/g%3E%3C/svg%3E")}
+.dk{color:#fff3d6}.dk .kick{color:#ffd37a}.dk .kick::before{color:#ffb703}.dk .sub,.dk .nt{color:#ffe9c8}.dk .e{color:#ffd37a}.dk .cat{color:#ffd37a}
+.dk .chip{border-color:#ffd37a;color:#fff3d6}.dk .chip[aria-pressed="true"]{background:#ffd37a;color:#2a1208}
+.dk .fm label{color:#ffe9c8}.dk .fm input,.dk .fm select,.dk .fm textarea{background:#ffffff1c;border-color:#ffffff55;color:#fff;color-scheme:dark}
+.dk .fm ::placeholder{color:#ffffffaa}.dk .er{color:#ffc2b8}.dk .fb{background:#00000045}
+.dk .btn{background:#ffb703;border-color:#ffb703;color:#2a1208}.dk .btn:hover{box-shadow:0 12px 30px #ffb70366}
+.toran{position:absolute;left:0;right:0;top:0;height:62px;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='64' viewBox='0 0 48 64'%3E%3Cpath d='M0 4Q24 20 48 4' fill='none' stroke='%232f7d3a' stroke-width='3'/%3E%3Cpath d='M24 14l-5 6 5 4 5-4z' fill='%232f7d3a'/%3E%3Ccircle cx='24' cy='30' r='7' fill='%23ffb703'/%3E%3Ccircle cx='24' cy='44' r='7' fill='%23ff8f1f'/%3E%3Ccircle cx='24' cy='57' r='5' fill='%23c2185b'/%3E%3C/svg%3E") repeat-x;background-size:48px 64px;z-index:3;pointer-events:none}
+footer{position:relative}footer .toran{top:-1px}
+.mand{position:absolute;right:-140px;top:70px;width:560px;max-width:70vw;opacity:.22;color:#ffd37a;pointer-events:none;z-index:1}
+.mand svg{width:100%;display:block;animation:spin 90s linear infinite}
+.mand.l{right:auto;left:-180px;top:auto;bottom:-120px;opacity:.16}
+@keyframes spin{to{transform:rotate(360deg)}}
+.hero::before{background:linear-gradient(180deg,#3d0a14d9,#3d0a1438 42%,#2a0710f5)}
+.hero .kick{color:#ffd37a!important}
+.hero h1 .e{color:#ffd37a}
+.pn{border-radius:999px 999px 28px 28px;border:3px solid #ffb703}
+@media(max-width:760px){.pn{border-radius:28px}}
+.pc small{color:#ffd37a}
+.pn::after,.ex::after,.pi::after{background:linear-gradient(180deg,#0000 35%,#2a0710ea)}
+.mar .ex{border:3px solid #ffb703}
+.eg>:nth-child(1) .ex,.eg>:nth-child(4) .ex{border-radius:999px 999px 26px 26px}
+.pi{border-radius:999px 999px 22px 22px;aspect-ratio:3/4}
+.pi[aria-pressed="true"]{border-color:#ffd37a}
+.pea .tl::before{border-color:#ffd37a}.pea .tl .n{background:#ffb703;color:#2a1208}.pea .tl button{background:#ffffff26;color:#fff}.pea .rs{color:#ffd37a}.pea .tl small{color:#ffe0b0}
+.wp{border-radius:999px 999px 36px 36px;border:4px solid #ffb703}
+.wi.on h3{color:var(--coral)}
+.cd{border:2px solid #ffb70399;box-shadow:0 14px 40px #6b0f1a22}
+.cd small{color:var(--lag)}.dur{background:#ffb703;color:#2a1208}
+.pat3 .chip,.pat1 .chip{border-color:#6b0f1a;color:var(--ink)}.pat3 .chip[aria-pressed="true"],.pat1 .chip[aria-pressed="true"]{background:#6b0f1a;color:#fff3d6}
+.ind .sf .im,.ind .sl2 .im{border:3px solid #ffb703}
+.ind .rd{color:#ffd37a}
+.ct{background-color:#3d0a14}
+.ct::before{background:linear-gradient(90deg,#3d0a14f5,#3d0a14b0)}
+.ct .btn{background:#ffb703;border-color:#ffb703;color:#2a1208}
+.ct .kick{color:#ffd37a}.ct h2 .e{color:#ffd37a}
+.ct .mand{opacity:.2}
+.gg button{border:3px solid #ffb703}.gg button:nth-child(3n+1){border-radius:999px 999px 22px 22px}
+footer{background:#2a0a10;padding-top:96px}
+.mega{background:linear-gradient(90deg,#ffb703,#ff8f1f,#c2185b);-webkit-background-clip:text;background-clip:text}
+footer h4{color:#ffd37a}
+.cur{background:#ffb703;color:#2a1208}
+.np{border-color:#ffb70388}
+.cd .ac span{background:var(--sand)}
+
+/* ===== functional additions ===== */
+.sbar{grid-template-columns:1.5fr 1fr 1fr 1.1fr auto}
+@media(max-width:900px){.sbar{grid-template-columns:1fr 1fr}.sbar .f1,.sbar>button{grid-column:1/-1}}
+.cb{position:relative}
+.dd{position:absolute;left:0;right:0;top:100%;margin:6px 0 0;background:#2a0710f5;border:1px solid #ffffff55;border-radius:14px;padding:6px;list-style:none;max-height:260px;overflow:auto;z-index:30;backdrop-filter:blur(10px)}
+.dd li{padding:9px 12px;border-radius:10px;cursor:pointer;color:#fff;display:flex;justify-content:space-between;gap:10px}
+.dd li small{color:#ffe0b0}.dd li[aria-selected="true"],.dd li:hover{background:#ffffff26}
+.stp{display:flex;gap:6px;align-items:center}.stp input{text-align:center;min-width:0}
+.stp button{flex:none;width:38px;height:46px;border-radius:12px;border:1px solid #ffffff66;background:#ffffff22;color:#fff;font-size:20px;cursor:pointer}.stp button:hover{background:#ffffff40}
+.sbar input[type=number]{-moz-appearance:textfield}
+.sum{display:flex;gap:10px;flex-wrap:wrap;align-items:center;font-weight:700;margin:0 0 24px}
+.fb.bad{border:1px solid #d23b2e}
+.fb textarea{width:100%;margin-top:10px;font:13px/1.5 ui-monospace,Menlo,monospace;background:var(--card);color:var(--ink);border:1px solid var(--line);border-radius:10px;padding:10px}
+.dk .fb textarea,.ct .fb textarea{background:#00000040;color:#fff;border-color:#ffffff55}
+.btn:disabled{opacity:.6;cursor:wait}
+.tl button:disabled{opacity:.35;cursor:not-allowed}
+.mb3{background:var(--bg);color:var(--ink);border-radius:28px;max-width:640px;width:100%;max-height:90vh;overflow:auto;padding:34px;position:relative;animation:pop .45s cubic-bezier(.2,.8,.2,1)}
+.mb3 .cat{color:var(--coral)}
+
+/* gallery fix: reveal on wrapper, arch frames keep their shape */
+.wd span{margin-right:0}
+.gg .gi{break-inside:avoid;margin:0 0 16px}
+.gg .gi button{margin:0;clip-path:inset(0 0 100% 0 round 22px)}
+.gg .gi.in button{clip-path:inset(0 0 0 0 round 22px)}
+.gg .gi:nth-child(3n+1) button{border-radius:999px 999px 22px 22px;clip-path:inset(0 0 100% 0 round 999px 999px 22px 22px)}
+.gg .gi:nth-child(3n+1).in button{clip-path:inset(0 0 0 0 round 999px 999px 22px 22px)}
+.gg button:nth-child(3n+1){border-radius:22px}
+@media(prefers-reduced-motion:reduce){.gg .gi button{clip-path:none!important}}
+</style>
+</head>
+<body>
+<div class="prog" id="prog" aria-hidden="true"></div><div class="cur" id="cur" aria-hidden="true"></div>
+<div id="root"></div>
+<script src="https://cdn.jsdelivr.net/npm/react@18.3.1/umd/react.production.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/react-dom@18.3.1/umd/react-dom.production.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/htm@3.1.1/dist/htm.umd.js"></script>
+<script>
+const {useState,useEffect,useRef}=React;const html=htm.bind(React.createElement);
+const RM=matchMedia("(prefers-reduced-motion:reduce)").matches,TOUCH=matchMedia("(hover:none)").matches;
+/* ===== EDIT ME ===== */
+const BRAND="Wanderly";
+const CONTACT={email:"",phone:"",address:""};
+const SOCIAL=[{l:"Instagram",h:""},{l:"Facebook",h:""},{l:"YouTube",h:""}];
+const FORM_ENDPOINT="";   // connect a real service; empty = prototype (nothing is sent)
+const U=id=>`https://images.unsplash.com/${id}?auto=format&fit=crop&w=1400&q=75`,P=p=>`https://images.pexels.com/photos/${p}?auto=compress&cs=tinysrgb&w=1400`;
+const IMG={ /* real photos, hotlinked — replace any URL with your own */
+ taj:[U("photo-1631781101051-121237b6c7cb"),"Taj Mahal in Agra with its long reflecting pool"],
+ jaipur:[U("photo-1692710066300-26a11fe05f28"),"Hawa Mahal, the Palace of Winds, in Jaipur"],
+ varanasi:[U("photo-1514907351870-bd69558b9f20"),"Boats on the Ganges at sunrise in Varanasi"],
+ bali:[U("photo-1559628233-eb1b1a45564b"),"Tegallalang rice terraces in Bali"],
+ swiss:[U("photo-1622307053412-5404f0c427c0"),"Oeschinen Lake and mountains near Kandersteg, Switzerland"],
+ kyoto:[U("photo-1705579687385-7c9c2a1961b9"),"Kinkaku-ji golden pavilion and its pond in Kyoto"],
+ sant:[P("1285625/pexels-photo-1285625.jpeg"),"Blue-domed churches and white buildings in Santorini"],
+ kerala:[U("photo-1563279036-8ae92c62ca4f"),"Houseboat on the Kerala backwaters"],
+ dubai:[U("photo-1553337546-017c3075360c"),"Dubai skyline at sunset"],
+ beach:[U("photo-1691422066850-de273fe9008d"),"Sunset over a beach in Bali"],
+ hike:[P("4638008/pexels-photo-4638008.jpeg"),"Hiker crossing a snowy mountain"],
+ kath:[P("36998147/pexels-photo-36998147/free-photo-of-vibrant-kathakali-performance-in-kerala.jpeg"),"Kathakali performance in Kerala"],
+ canoe:[P("36998152/pexels-photo-36998152/free-photo-of-traditional-canoes-in-kerala-backwaters.jpeg"),"Traditional canoes on the Kerala backwaters"],
+ hboat:[P("36998153/pexels-photo-36998153/free-photo-of-serene-houseboats-on-kerala-s-backwaters.jpeg"),"Houseboats on the Alappuzha backwaters"],
+ sant2:[P("13900724/pexels-photo-13900724.jpeg"),"Blue-domed church in Oia, Santorini"],
+ sant3:[P("17919743/pexels-photo-17919743/free-photo-of-caldera-seen-from-santorini.jpeg"),"Santorini caldera seen from the cliffs"],
+ food:[P("37279459/pexels-photo-37279459/free-photo-of-colorful-street-food-market-with-skewers-and-snacks.jpeg"),"Colourful street food market with skewers and snacks"]};
+const CREDITS="Unsplash License — Taj Mahal: Abhishek Koli · Hawa Mahal: Shivani Sonker · Varanasi: Frank Holleman · Kerala boat: Tomas Sevilla · Bali terraces: Silas Baisch · Bali beach: Norbert Braun · Kyoto: James Butterly · Swiss Alps: Patrick Robert Doyle · Dubai: Nathan John. Pexels (free to use) — Santorini, Kerala set (Frank van Dijk), hiker and street-food photos.";
+const DEST=[
+ {k:"taj",n:"Agra",co:"India",d:"Mughal marble, gardens and the Taj at first light."},
+ {k:"jaipur",n:"Jaipur",co:"India",d:"The Pink City — palaces, bazaars and royal Rajasthan."},
+ {k:"varanasi",n:"Varanasi",co:"India",d:"Ganga ghats, dawn boat rides and evening aarti."},
+ {k:"kerala",n:"Kerala",co:"India",d:"Backwaters, spice hills and houseboat days."},
+ {k:"bali",n:"Bali",co:"Indonesia",d:"Terraced hills, temples and slow tropical mornings."},
+ {k:"kyoto",n:"Kyoto",co:"Japan",d:"Golden pavilions, tea houses and quiet shrines."},
+ {k:"sant",n:"Santorini",co:"Greece",d:"Whitewashed cliffs above a deep blue caldera."},
+ {k:"swiss",n:"Swiss Alps",co:"Switzerland",d:"Glacial lakes, snow ridgelines and scenic rail."},
+ {k:"dubai",n:"Dubai",co:"UAE",d:"Skyline contrasts, desert dunes and golden hours."}];
+const EXP=[["hike","Adventure Travel","Trails, peaks and big views","Adventure"],["beach","Beach Holidays","Sand, sea and slow sunsets","Beach"],["kath","Cultural Experiences","Kathakali, craft and local stories","Culture"],["canoe","Nature & Wildlife","Waterways and green landscapes","Nature"],["sant3","Luxury Escapes","Effortless, considered comfort","Luxury"],["hboat","Family Vacations","Easy plans for all ages","Family"],["food","Food & Culinary Tours","Markets, stalls and kitchens","Food"],["jaipur","Weekend Getaways","Short trips, big resets","Weekend"]];
+const PKG=[
+ {id:1,k:"jaipur",t:"Pink City Palaces",days:5,price:38000,cat:"Culture",acts:["Hawa Mahal visit","Bazaar walk","Folk music evening"],d:"Royal palaces, colourful bazaars and Rajasthani flavours."},
+ {id:2,k:"taj",t:"Taj & Mughal Trail",days:3,price:24000,cat:"Culture",acts:["Sunrise Taj visit","Heritage walk","Local cooking"],d:"Mughal monuments and old-city streets, unhurried."},
+ {id:3,k:"varanasi",t:"Ganga Dawn",days:4,price:29000,cat:"Spiritual",acts:["Dawn boat ride","Ghat walk","Evening aarti"],d:"Sunrise on the river and the rhythm of the ghats."},
+ {id:4,k:"kerala",t:"Backwater Drift",days:6,price:42000,cat:"Family",acts:["Houseboat","Spice hills","Kathakali show"],d:"Houseboat days and green hill stations."},
+ {id:5,k:"bali",t:"Island Sunsets",days:6,price:78000,cat:"Beach",acts:["Beach days","Temple tour","Cooking class"],d:"Slow mornings, village life and golden-hour beaches."},
+ {id:6,k:"sant",t:"Caldera Escape",days:5,price:165000,cat:"Luxury",acts:["Sunset sail","Wine tasting","Cliffside stay"],d:"Cliff-top stays at an unhurried island pace."},
+ {id:7,k:"swiss",t:"Peaks by Rail",days:7,price:185000,cat:"Adventure",acts:["Scenic rail","Alpine hike","Lake cruise"],d:"Classic rail routes with mountain day hikes."},
+ {id:8,k:"kerala",img:"canoe",t:"Green Hills & Waterways",days:5,price:36000,cat:"Nature",acts:["Canoe ride","Plantation walk","Birdwatching"],d:"Quiet canals, spice plantations and misty hills."},
+ {id:9,k:"jaipur",img:"food",t:"Street Food Trail",days:3,price:21000,cat:"Food",acts:["Market tasting walk","Cooking class","Sweet-shop tour"],d:"Chaat, kachori and mithai through the old bazaars."},
+ {id:10,k:"dubai",t:"Dunes & Skylines",days:4,price:98000,cat:"Weekend",acts:["Desert safari","Old town walk","Skyline views"],d:"City highlights and a golden-hour desert evening."}];
+const CATS=["All","Culture","Spiritual","Family","Beach","Luxury","Adventure","Nature","Food","Weekend"];
+const WHY=[["Personalised itineraries","Plans shaped around your pace and interests.","jaipur"],["Carefully planned experiences","Thoughtful routes with room to breathe.","taj"],["Local cultural discovery","Ways to connect with a place, not just see it.","kath"],["Flexible travel options","Adjust dates and details as plans evolve.","varanasi"],["Dedicated trip assistance","Help on hand when you need it.","kerala"]];
+const STORIES=[
+ ["Inspiration","Hidden Places Worth Exploring","jaipur",["Some of the most memorable stops are the quiet ones — a lane behind a famous monument, a village market before the crowds arrive, a ghat at dawn.","Ask locals where they go, travel outside peak hours and leave room in your plan for detours."]],
+ ["Guide","A Guide to Traveling Through Kerala","hboat",["Kerala is best explored slowly: start with the backwaters around Alappuzha, add a houseboat or canoe day, then head up to the spice hills.","Catch a Kathakali performance in the evening and plan meals around local seafood and coconut-based dishes."]],
+ ["Planning","How to Plan Your First International Trip","swiss",["Start with the basics: check passport validity, visa rules and travel insurance well in advance.","Pack light, keep digital and paper copies of your documents, and build in a rest day after long flights."]],
+ ["Culture","Cultural Experiences Every Traveler Should Try","kath",["Join a cooking class, watch a live performance or spend a morning at a local market — small experiences connect you to a place.","Dress respectfully at religious sites, learn a few local phrases and ask before photographing people."]]];
+const GAL=["taj","jaipur","varanasi","kerala","bali","kyoto","sant","kath","beach","hboat","canoe","food","swiss","hike","dubai","sant2"];
+const RATIO=["4/5","1/1","3/4","4/3","4/5","1/1","3/4","5/4","4/5","1/1","3/4","4/3","5/4","4/5","1/1","3/4"];
+const NAV=[["top","Home"],["destinations","Destinations"],["experiences","Experiences"],["packages","Tour Packages"],["about","About Us"],["contact","Contact"]];
+const EM=/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+/* ===== helpers ===== */
+function Img({k,eager,className="",style}){
+  const [bad,setBad]=useState(false),[src,alt]=IMG[k];
+  return bad?html`<div class=${"img ph "+className} role="img" aria-label=${alt} style=${style}></div>`:html`<img class=${"img "+className} src=${src} alt=${alt} loading=${eager?"eager":"lazy"} decoding="async" onError=${()=>setBad(true)} style=${style}/>`;
+}
+function useIn(thr=.2){const ref=useRef();useEffect(()=>{const el=ref.current;if(RM){el.classList.add("in");return}const io=new IntersectionObserver(([e])=>{if(e.isIntersecting){el.classList.add("in");io.disconnect()}},{threshold:thr});io.observe(el);return()=>io.disconnect()},[]);return ref}
+function H({t,as="h2",className=""}){
+  const ref=useIn(.3);
+  return React.createElement(as,{ref,className:"wd "+className},t.split(" ").map((w,i)=>{const e=w[0]==="*";return html`<${React.Fragment} key=${i}><span class=${e?"e":""} style=${{transitionDelay:i*70+"ms"}}>${e?w.slice(1):w}</span>${" "}</${React.Fragment}>`}));
+}
+function Reveal({children,className="",...r}){const ref=useIn(.12);return html`<div ref=${ref} className=${"rv "+className} ...${r}>${children}</div>`}
+function Tilt({children,className="",...r}){
+  const ref=useRef();
+  const mv=e=>{if(RM||TOUCH)return;const b=ref.current.getBoundingClientRect(),x=(e.clientX-b.left)/b.width-.5,y=(e.clientY-b.top)/b.height-.5;ref.current.style.transform=`perspective(900px) rotateX(${-y*9}deg) rotateY(${x*11}deg)`};
+  return html`<div ref=${ref} className=${"tilt "+className} onMouseMove=${mv} onMouseLeave=${()=>{ref.current.style.transform=""}} ...${r}>${children}</div>`;
+}
+const Mandala=()=>html`<svg viewBox="-110 -110 220 220" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true">${[...Array(16)].map((_,i)=>html`<g key=${i} transform=${"rotate("+i*22.5+")"}><path d="M0 -38Q14 -62 0 -96Q-14 -62 0 -38Z"/><circle cy="-100" r="3"/></g>`)}${[...Array(8)].map((_,i)=>html`<path key=${"p"+i} transform=${"rotate("+(i*45+22.5)+")"} d="M0 -20Q9 -34 0 -50Q-9 -34 0 -20Z"/>`)}<circle r="14"/><circle r="64" stroke-dasharray="2 5"/><circle r="104"/></svg>`;
+const Logo=()=>html`<svg width="32" height="32" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="19" fill="#c2185b"/><path d="M8 27l8-12 5 7 3-4 8 9z" fill="#fff"/><circle cx="27" cy="12" r="3.5" fill="#ffd36a"/></svg>`;
+function Field({k,label,v,e,set,full,children,...p}){
+  const c={id:"f-"+k,value:v[k],onChange:x=>set({...v,[k]:x.target.value}),"aria-invalid":!!e[k],"aria-describedby":"e-"+k,...p};
+  return html`<div class=${full?"f":""}><label for=${"f-"+k}>${label}</label>${p.rows?html`<textarea ...${c}/>`:children?html`<select ...${c}>${children}</select>`:html`<input ...${c}/>`}<div class="er" id=${"e-"+k} role="alert">${e[k]||""}</div></div>`;
+}
+/* ===== sections ===== */
+function Header(){
+  const [o,setO]=useState(false);
+  return html`<header><div class="np"><a class="logo" href="#top"><${Logo}/>${BRAND}</a>
+   <ul id="mn" class=${o?"open":""}>${NAV.map(([id,l])=>html`<li key=${id}><a href=${"#"+id} onClick=${()=>setO(false)}>${l}</a></li>`)}</ul>
+   <span style=${{display:"flex",gap:8}}><a class="btn mag nb" href="#builder" style=${{padding:"12px 22px"}}>Plan Your Trip</a><button class="btn d mb" style=${{padding:"11px 20px"}} aria-expanded=${o} aria-controls="mn" onClick=${()=>setO(!o)}>${o?"Close":"Menu"}</button></span></div></header>`;
+}
+const today=()=>{const d=new Date();return new Date(d.getTime()-d.getTimezoneOffset()*6e4).toISOString().slice(0,10)};
+const nights=(a,b)=>Math.round((new Date(b)-new Date(a))/864e5);
+const inr=n=>"₹"+Math.round(n).toLocaleString("en-IN");
+async function deliver(kind,data){
+  const text=Object.entries(data).map(([k,v])=>k+": "+v).join("\n");
+  if(FORM_ENDPOINT){
+    try{const r=await fetch(FORM_ENDPOINT,{method:"POST",headers:{"Content-Type":"application/json",Accept:"application/json"},body:JSON.stringify({kind,...data})});
+      return r.ok?{ok:true,msg:"Thank you! Your request was sent."}:{ok:false,msg:"Sorry, sending failed ("+r.status+"). Please try again."}}
+    catch(e){return{ok:false,msg:"Network error — your request was not sent. Please try again."}}
+  }
+  if(CONTACT.email){location.href="mailto:"+CONTACT.email+"?subject="+encodeURIComponent(kind)+"&body="+encodeURIComponent(text);return{ok:true,msg:"Your email app should open with the request ready. Nothing is sent until you press send there."}}
+  return{ok:false,manual:text,msg:"No email address or form service is connected yet, so nothing was sent. You can copy or download your request below."};
+}
+function Result({r}){
+  const [c,setC]=useState("");
+  useEffect(()=>setC(""),[r]);
+  if(!r)return null;
+  const id="manual-"+r.id;
+  const copy=async()=>{try{await navigator.clipboard.writeText(r.manual);setC("Copied!")}catch(e){const t=document.getElementById(id);if(t){t.focus();t.select()}setC("Press Ctrl/Cmd+C to copy")}};
+  const dl=()=>{const bl=new Blob([r.manual],{type:"text/plain"}),a=document.createElement("a");a.href=URL.createObjectURL(bl);a.download="wanderly-request.txt";document.body.appendChild(a);a.click();a.remove();URL.revokeObjectURL(a.href)};
+  return html`<div class=${"fb"+(r.ok?"":" bad")} role="status"><p style=${{margin:0}}>${r.msg}</p>${r.manual&&html`<textarea id=${id} readOnly rows="6" value=${r.manual}/><div class="cta" style=${{marginTop:10}}><button type="button" class="btn" onClick=${copy}>Copy request</button><button type="button" class="btn g" style=${{color:"inherit",borderColor:"currentColor"}} onClick=${dl}>Download .txt</button>${c&&html`<span style=${{alignSelf:"center"}}>${c}</span>`}</div>`}</div>`;
+}
+function Modal({label,onClose,children}){
+  const cl=useRef();
+  useEffect(()=>{cl.current&&cl.current.focus();const k=e=>{if(e.key==="Escape")onClose()};addEventListener("keydown",k);document.body.style.overflow="hidden";return()=>{removeEventListener("keydown",k);document.body.style.overflow=""}},[]);
+  return html`<div class="md" onClick=${onClose}><div class="mb3" role="dialog" aria-modal="true" aria-label=${label} onClick=${e=>e.stopPropagation()}><button class="x" ref=${cl} aria-label="Close" onClick=${onClose}>✕</button>${children}</div></div>`;
+}
+function Hero({onSearch}){
+  const [i,setI]=useState(0),[v,setV]=useState({q:"",d:"",r:"",n:"2"}),[e,setE]=useState({}),[open,setOpen]=useState(false),[hi,setHi]=useState(-1);
+  useEffect(()=>{if(RM)return;const t=setTimeout(()=>setI(x=>(x+1)%DEST.length),6500);return()=>clearTimeout(t)},[i]);
+  const m=DEST.filter(d=>(d.n+" "+d.co).toLowerCase().includes(v.q.trim().toLowerCase()));
+  const pick=d=>{setV(s=>({...s,q:d.n}));setOpen(false);setHi(-1)};
+  const step=x=>setV(s=>({...s,n:String(Math.min(20,Math.max(1,(parseInt(s.n,10)||1)+x)))}));
+  const key=ev=>{if(ev.key==="ArrowDown"){ev.preventDefault();setOpen(true);setHi(h=>Math.min(m.length-1,h+1))}else if(ev.key==="ArrowUp"){ev.preventDefault();setHi(h=>Math.max(0,h-1))}else if(ev.key==="Enter"&&open&&hi>=0&&m[hi]){ev.preventDefault();pick(m[hi])}else if(ev.key==="Escape")setOpen(false)};
+  const go=ev=>{ev.preventDefault();const n={},q=v.q.trim().toLowerCase();
+   if(q&&!DEST.some(d=>(d.n+" "+d.co).toLowerCase().includes(q))&&!PKG.some(p=>p.t.toLowerCase().includes(q)))n.q="No tours for “"+v.q.trim()+"” yet — try "+DEST.slice(0,3).map(d=>d.n).join(", ")+"…";
+   if(v.d&&v.d<today())n.d="Departure is in the past";
+   if(v.r&&!v.d)n.d="Pick a departure date first";else if(v.d&&v.r&&v.r<=v.d)n.r="Return must be after departure";
+   const t=Number(v.n);if(!Number.isInteger(t)||t<1||t>20)n.n="Enter 1–20 travelers";
+   setE(n);if(!Object.keys(n).length){setOpen(false);onSearch({...v,q:v.q.trim()})}};
+  return html`<section class="hero" id="top" style=${{padding:"130px 0 28px"}}>
+  ${DEST.map((d,k)=>html`<div key=${d.k} class=${"sl"+(k===i?" on":"")} aria-hidden=${k!==i}><${Img} k=${d.k} eager=${k===0}/></div>`)}
+  <div class="mand" aria-hidden="true"><${Mandala}/></div><div class="wrap"><div class="hr"><div><div class="kick" style=${{color:"#7ff0e6"}}>स्वागतम् · Now exploring — ${DEST[i].n}, ${DEST[i].co}</div>
+   <${H} as="h1" t="The world is waiting. Find your *next *adventure."/>
+   <p class="l">Discover extraordinary destinations, experience local cultures, and create unforgettable memories with journeys designed around you.</p>
+   <div class="cta"><a class="btn mag" href="#destinations" data-cur="Go">Explore Destinations →</a><a class="btn g mag" href="#packages">Discover Our Tours</a></div></div>
+   <div class="pager" role="group" aria-label="Featured destination">${DEST.map((d,k)=>html`<button key=${d.k} aria-current=${k===i} aria-label=${d.n} onClick=${()=>setI(k)}><i>0${k+1}</i><span>${d.n}</span></button>`)}</div></div>
+   <form class="sbar" onSubmit=${go} role="search" aria-label="Search tours" noValidate>
+    <div class="f1 cb"><label for="h-q">Destination</label><input id="h-q" role="combobox" aria-expanded=${open} aria-controls="dd" aria-autocomplete="list" autocomplete="off" placeholder="Where to?" value=${v.q} onChange=${x=>{setV({...v,q:x.target.value});setOpen(true);setHi(-1)}} onFocus=${()=>setOpen(true)} onBlur=${()=>setOpen(false)} onKeyDown=${key}/>
+     ${open&&m.length>0&&html`<ul class="dd" id="dd" role="listbox">${m.map((d,k)=>html`<li key=${d.k} role="option" aria-selected=${k===hi} onMouseDown=${ev=>{ev.preventDefault();pick(d)}}><b>${d.n}</b><small>${d.co}</small></li>`)}</ul>`}<div class="er" role="alert">${e.q||""}</div></div>
+    <div><label for="h-d">Depart</label><input id="h-d" type="date" min=${today()} value=${v.d} onChange=${x=>setV({...v,d:x.target.value})} aria-invalid=${!!e.d}/><div class="er" role="alert">${e.d||""}</div></div>
+    <div><label for="h-r">Return</label><input id="h-r" type="date" min=${v.d||today()} value=${v.r} onChange=${x=>setV({...v,r:x.target.value})} aria-invalid=${!!e.r}/><div class="er" role="alert">${e.r||""}</div></div>
+    <div><label for="h-n">Travelers</label><div class="stp"><button type="button" aria-label="Fewer travelers" onClick=${()=>step(-1)}>−</button><input id="h-n" type="number" min="1" max="20" value=${v.n} onChange=${x=>setV({...v,n:x.target.value})} aria-invalid=${!!e.n}/><button type="button" aria-label="More travelers" onClick=${()=>step(1)}>+</button></div><div class="er" role="alert">${e.n||""}</div></div>
+    <button class="btn mag" type="submit">Search</button></form></div></section>`;
+}
+function Destinations({onAdd,trip,onTours}){
+  const [o,setO]=useState(0);
+  return html`<section id="destinations" class="pat1"><div class="toran" aria-hidden="true"></div><div class="wrap"><div class="kick">01 · गंतव्य · Destinations</div><${H} t="Where will you *wander next?"/><p class="sub">Hover or tap a panel to open it. Edit the DEST list to add your own places.</p>
+  <div class="acc">${DEST.map((d,k)=>html`<div key=${d.k} class=${"pn"+(o===k?" on":"")} tabindex="0" role="button" aria-expanded=${o===k} aria-label=${d.n+", "+d.co} data-cur=${o===k?"":"Open"} onMouseEnter=${()=>!TOUCH&&setO(k)} onFocus=${()=>setO(k)} onClick=${()=>setO(k)} onKeyDown=${e=>{if(e.target===e.currentTarget&&(e.key==="Enter"||e.key===" ")){e.preventDefault();setO(k)}}}>
+   <${Img} k=${d.k}/><span class="vt">${d.n}</span>
+   <div class="pc"><small>${d.co}</small><h3>${d.n}</h3><p>${d.d}</p><div class="cta"><button class="btn" tabindex=${o===k?0:-1} onClick=${e=>{e.stopPropagation();onTours(d.n)}}>See tours</button><button class="btn g" tabindex=${o===k?0:-1} onClick=${e=>{e.stopPropagation();onAdd(d.k)}}>${trip.includes(d.k)?"✓ In my trip":"+ Add to my trip"}</button></div></div></div>`)}</div></div></section>`;
+}
+function Experiences({onPick}){
+  return html`<section id="experiences" class="dk mar"><div class="wrap"><div class="kick">02 · अनुभव · Experiences</div><${H} t="Travel *your way."/><p class="sub">Eight ways to explore — tap one to see matching tours.</p>
+  <div class="eg">${EXP.map(([k,t,sb,c])=>html`<${Tilt} key=${t}><a class="ex" href="#packages" data-cur="View" aria-label=${t+" — view tours"} onClick=${e=>{e.preventDefault();onPick(c)}}><${Img} k=${k}/><div><h3>${t}</h3><span>${sb}</span></div></a></${Tilt}>`)}</div></div></section>`;
+}
+function Packages({search,setSearch,cat,setCat,clear,onAdd}){
+  const [so,setSo]=useState("f"),[sel,setSel]=useState(null);
+  const days=search.on&&search.d&&search.r?nights(search.d,search.r)+1:0,N=search.on?(parseInt(search.n,10)||1):1,q=(search.q||"").trim().toLowerCase();
+  const L=PKG.filter(p=>{const d=DEST.find(x=>x.k===p.k);return(cat==="All"||p.cat===cat)&&(!q||(d.n+" "+d.co+" "+p.t).toLowerCase().includes(q))&&(!days||p.days<=days)}).sort((a,b)=>so==="a"?a.price-b.price:so==="d"?b.price-a.price:so==="s"?a.days-b.days:a.id-b.id);
+  const filtered=q||days||cat!=="All"||search.on;
+  const d=sel&&DEST.find(x=>x.k===sel.k);
+  const book=k=>{onAdd(k);setSel(null);document.getElementById("builder").scrollIntoView({behavior:RM?"auto":"smooth"})};
+  return html`<section id="packages" class="pat3"><div class="wrap"><div class="kick">03 · यात्रा पैकेज · Tour packages</div><${H} t="Featured *journeys"/>
+  <div class="bar"><div class="ch" role="group" aria-label="Filter by category">${CATS.map(c=>html`<button key=${c} class="chip" aria-pressed=${cat===c} onClick=${()=>setCat(c)}>${c}</button>`)}</div>
+   <select aria-label="Sort packages" value=${so} onChange=${e=>setSo(e.target.value)}><option value="f">Featured</option><option value="a">Price: low to high</option><option value="d">Price: high to low</option><option value="s">Shortest first</option></select></div>
+  ${filtered&&html`<p class="sum" role="status">Showing ${L.length} tour${L.length===1?"":"s"}${search.q?` for “${search.q}”`:""}${cat!=="All"?` · ${cat}`:""}${days?` · fits your ${days} days`:""}${search.on?` · ${N} traveler${N>1?"s":""}`:""} <button class="chip" onClick=${clear}>Clear all</button></p>`}
+  ${L.length?html`<div class="pk">${L.map(p=>{const dd=DEST.find(x=>x.k===p.k);return html`<${Tilt} key=${p.id}><article class="cd"><div class="im"><${Img} k=${p.img||p.k}/><span class="dur">${p.days} days</span></div><div class="bd"><small>${dd.n} · ${p.cat}</small><h3>${p.t}</h3><p>${p.d}</p><div class="ac">${p.acts.map(a=>html`<span key=${a}>${a}</span>`)}</div>
+   <div class="pr"><div><em>Per person · sample price</em><strong>${inr(p.price)}</strong>${N>1&&html`<em>≈ ${inr(p.price*N)} for ${N}</em>`}</div><button class="btn d mag" style=${{padding:"12px 22px"}} onClick=${()=>setSel(p)}>View Details</button></div></div></article></${Tilt}>`})}</div>`:html`<div class="empty" role="status"><h3>No tours match yet</h3><p>${days?`Nothing fits ${days} days.`:"Try a different filter."}</p><div class="cta" style=${{justifyContent:"center"}}>${days?html`<button class="btn" onClick=${()=>setSearch(s=>({...s,d:"",r:""}))}>Ignore my dates</button>`:""}<button class="btn d" onClick=${clear}>Show all tours</button></div></div>`}
+  <p class="nt">Packages, prices and availability are placeholders, not real offers.</p></div>
+  ${sel&&html`<${Modal} label=${sel.t} onClose=${()=>setSel(null)}><div style=${{margin:"-34px -34px 20px",height:240,borderRadius:"28px 28px 0 0",overflow:"hidden"}}><${Img} k=${sel.img||sel.k}/></div><small class="cat">${d.n}, ${d.co} · ${sel.days} days · ${sel.cat}</small><h3 style=${{fontSize:36,margin:"8px 0 10px"}}>${sel.t}</h3><p style=${{color:"var(--mute)",margin:0}}>${sel.d}</p>
+   <ol style=${{color:"var(--mute)",paddingLeft:20}}>${["Arrival and welcome",...sel.acts,"Departure"].map((a,i)=>html`<li key=${i}>${a}</li>`)}</ol><p class="nt" style=${{margin:"0 0 14px"}}>Sample itinerary and price (${inr(sel.price)} per person) — real details to be confirmed.</p>
+   <div class="cta"><button class="btn" onClick=${()=>book(sel.k)}>Book This Tour →</button><button class="btn d" onClick=${()=>setSel(null)}>Close</button></div></${Modal}>`}</section>`;
+}
+function Builder({trip,onAdd,move,setTrip,search}){
+  const [v,setV]=useState({from:"",to:"",n:"2",style:"",budget:"",email:""}),[e,setE]=useState({}),[res,setRes]=useState(null),[busy,setBusy]=useState(false);
+  useEffect(()=>{if(search.on)setV(s=>({...s,from:search.d||s.from,to:search.r||s.to,n:search.n||s.n}))},[search.on,search.d,search.r,search.n]);
+  const names=trip.map(k=>DEST.find(d=>d.k===k).n).join(" → ");
+  const sub=async ev=>{ev.preventDefault();const n={};
+   if(!trip.length)n.trip="Add at least one destination to your trip.";
+   if(!v.from)n.from="Choose a departure date.";else if(v.from<today())n.from="Departure is in the past.";
+   if(!v.to)n.to="Choose a return date.";else if(v.from&&v.to<=v.from)n.to="Return must be after departure.";
+   const t=Number(v.n);if(!Number.isInteger(t)||t<1||t>20)n.n="Enter 1–20 travelers.";if(!v.style)n.style="Pick a travel style.";if(!EM.test(v.email))n.email="Enter a valid email.";
+   setE(n);setRes(null);if(Object.keys(n).length)return;
+   setBusy(true);const r=await deliver("Trip request",{Destinations:names,Departure:v.from,Return:v.to,Days:nights(v.from,v.to)+1,Travelers:v.n,Style:v.style,Budget:v.budget||"n/a",Email:v.email});setBusy(false);setRes({...r,id:Date.now()})};
+  return html`<section id="builder" class="dk pea"><div class="mand l" aria-hidden="true"><${Mandala}/></div><div class="wrap"><div class="kick">04 · यात्रा योजना · Trip builder</div><${H} t="Build your *dream trip."/><p class="sub">Tap places to add them to your trip, reorder the stops, then tell us how you like to travel.</p>
+  <div class="tb"><div><div class="pick">${DEST.map(d=>{const n=trip.indexOf(d.k);return html`<button key=${d.k} class="pi" aria-pressed=${n>=0} aria-label=${d.n} data-cur=${n>=0?"Remove":"Add"} onClick=${()=>onAdd(d.k,true)}><${Img} k=${d.k}/><b>${d.n}</b><i>${n>=0?n+1:"+"}</i></button>`})}</div>
+   <ol class="tl" aria-label="Your trip stops">${trip.map((k,i)=>{const d=DEST.find(x=>x.k===k);return html`<li key=${k}><span class="n">${i+1}</span><div><b>${d.n}</b><small>${d.co}</small></div><span><button type="button" aria-label=${"Move "+d.n+" up"} disabled=${i===0} onClick=${()=>move(i,-1)}>↑</button><button type="button" aria-label=${"Move "+d.n+" down"} disabled=${i===trip.length-1} onClick=${()=>move(i,1)}>↓</button><button type="button" aria-label=${"Remove "+d.n} onClick=${()=>setTrip(t=>t.filter(x=>x!==k))}>✕</button></span></li>`})}</ol>
+   <p class="rs" role="status">${trip.length?`${trip.length} stop${trip.length>1?"s":""}: ${names}`:"No stops yet — tap a place above."}</p>${trip.length>0&&html`<button type="button" class="chip" onClick=${()=>setTrip([])}>Clear trip</button>`}<div class="er" role="alert">${e.trip||""}</div></div>
+  <form class="fm" onSubmit=${sub} noValidate><div class="fg">
+   <${Field} k="from" label="Departure" type="date" min=${today()} v=${v} e=${e} set=${setV}/><${Field} k="to" label="Return" type="date" min=${v.from||today()} v=${v} e=${e} set=${setV}/>
+   <${Field} k="n" label="Travelers" type="number" min="1" max="20" v=${v} e=${e} set=${setV}/>
+   <${Field} k="style" label="Travel style" v=${v} e=${e} set=${setV}><option value="">Select…</option>${["Adventure","Beach","Culture","Spiritual","Luxury","Family","Food","Weekend"].map(o=>html`<option key=${o}>${o}</option>`)}</${Field}>
+   <${Field} k="budget" label="Approx. budget (optional)" v=${v} e=${e} set=${setV} placeholder="e.g. ₹1,00,000" full=${1}/><${Field} k="email" label="Your email" type="email" v=${v} e=${e} set=${setV} full=${1}/>
+   <div class="f"><button class="btn mag" type="submit" disabled=${busy}>${busy?"Sending…":"Request my itinerary →"}</button></div></div><${Result} r=${res}/></form></div></div></section>`;
+}
+function Why(){
+  const [a,setA]=useState(0);
+  return html`<section id="about" class="pat1"><div class="wrap wy"><div class="wp" aria-hidden="true">${WHY.map(([,,k],i)=>html`<${Img} key=${k} k=${k} className=${i===a?"on":""}/>`)}</div>
+  <div><div class="kick">05 · हमारे बारे में · Why ${BRAND}</div><p class="hi">अतिथि देवो भव <span>— the guest is god</span></p><${H} t="Travel with *care."/><p class="sub" style=${{marginBottom:24}}>${BRAND} is a placeholder brand — replace with your own story. No claims about experience or traveler numbers are made here.</p>
+  ${WHY.map(([t,d],i)=>html`<div key=${t} class=${"wi"+(a===i?" on":"")} tabindex="0" onMouseEnter=${()=>setA(i)} onFocus=${()=>setA(i)} onClick=${()=>setA(i)}><h3><i>0${i+1}</i>${t}</h3><p>${d}</p></div>`)}</div></div></section>`;
+}
+function Stories(){
+  const [f,...r]=STORIES,[open,setOpen]=useState(null);
+  const op=(ev,st)=>{ev.preventDefault();setOpen(st)};
+  return html`<section class="dk ind"><div class="wrap"><div class="kick">06 · कहानियाँ · Travel journal</div><${H} t="Stories & *inspiration"/>
+  <div class="sg"><${Reveal}><a class="sf" href="#" data-cur="Read" onClick=${ev=>op(ev,f)}><div class="im"><${Img} k=${f[2]}/></div><span class="cat">${f[0]}</span><h3>${f[1]}</h3><span class="rd">Read Story <span>→</span></span></a></${Reveal}>
+  <div class="sr">${r.map((st,i)=>html`<${Reveal} key=${st[1]} style=${{transitionDelay:i*100+"ms"}}><a class="sl2" href="#" data-cur="Read" onClick=${ev=>op(ev,st)}><div class="im"><${Img} k=${st[2]}/></div><div><span class="cat">${st[0]}</span><h3>${st[1]}</h3><span class="rd">Read Story →</span></div></a></${Reveal}>`)}</div></div>
+  <p class="nt">Sample articles — replace with your own stories and dates.</p></div>
+  ${open&&html`<${Modal} label=${open[1]} onClose=${()=>setOpen(null)}><div style=${{margin:"-34px -34px 20px",height:220,borderRadius:"28px 28px 0 0",overflow:"hidden"}}><${Img} k=${open[2]}/></div><span class="cat" style=${{color:"var(--coral)"}}>${open[0]}</span><h3 style=${{fontSize:34,margin:"8px 0 14px"}}>${open[1]}</h3>${open[3].map((p,i)=>html`<p key=${i}>${p}</p>`)}<p class="nt">Sample story — replace with your own article.</p><button class="btn" onClick=${()=>{setOpen(null);document.getElementById("builder").scrollIntoView({behavior:RM?"auto":"smooth"})}}>Plan a trip like this →</button></${Modal}>`}</section>`;
+}
+function Gallery(){
+  const [o,setO]=useState(-1),cl=useRef(),gr=useRef();
+  useEffect(()=>{const b=[...gr.current.children],all=()=>b.forEach(x=>x.classList.add("in"));
+    if(RM||!("IntersectionObserver" in window)){all();return}
+    const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target)}}),{threshold:.01,rootMargin:"0px 0px 120px 0px"});
+    b.forEach((x,i)=>{x.firstChild.style.transitionDelay=(i%3)*120+"ms";io.observe(x)});
+    const t=setTimeout(all,3500);return()=>{clearTimeout(t);io.disconnect()}},[]);
+  useEffect(()=>{if(o<0)return;cl.current&&cl.current.focus();const k=e=>{if(e.key==="Escape")setO(-1);if(e.key==="ArrowRight")setO(x=>(x+1)%GAL.length);if(e.key==="ArrowLeft")setO(x=>(x-1+GAL.length)%GAL.length)};addEventListener("keydown",k);return()=>removeEventListener("keydown",k)},[o]);
+  return html`<section class="pat3"><div class="wrap"><div class="kick">07 · झलकियाँ · Gallery</div><${H} t="Moments worth *chasing"/>
+  <div class="gg" ref=${gr}>${GAL.map((k,i)=>html`<div class="gi" key=${k}><button style=${{aspectRatio:RATIO[i]}} onClick=${()=>setO(i)} data-cur="Zoom" aria-label=${"Open image: "+IMG[k][1]}><${Img} k=${k}/></button></div>`)}</div></div>
+  ${o>=0&&html`<div class="lb" role="dialog" aria-modal="true" aria-label="Image viewer"><div><div class="box"><${Img} k=${GAL[o]}/></div><p>${IMG[GAL[o]][1]} · ${o+1}/${GAL.length}</p></div>
+   <button ref=${cl} style=${{top:20,right:20}} onClick=${()=>setO(-1)} aria-label="Close">✕</button><button style=${{left:16,top:"50%"}} onClick=${()=>setO((o-1+GAL.length)%GAL.length)} aria-label="Previous">←</button><button style=${{right:16,top:"50%"}} onClick=${()=>setO((o+1)%GAL.length)} aria-label="Next">→</button></div>`}</section>`;
+}
+function Contact(){
+  const [v,setV]=useState({name:"",email:"",int:"",msg:""}),[e,setE]=useState({}),[res,setRes]=useState(null),[busy,setBusy]=useState(false),[nl,setNl]=useState({e:""}),[ne,setNe]=useState({}),[nr,setNr]=useState(null),[nb,setNb]=useState(false);
+  const sub=async ev=>{ev.preventDefault();const n={};if(v.name.trim().length<2)n.name="Please enter your name.";if(!EM.test(v.email))n.email="Enter a valid email.";if(v.msg.trim().length<10)n.msg="Write at least 10 characters.";setE(n);setRes(null);if(Object.keys(n).length)return;
+   setBusy(true);const r=await deliver("Contact message",{Name:v.name,Email:v.email,Interest:v.int||"n/a",Message:v.msg});setBusy(false);setRes({...r,id:Date.now()});if(r.ok&&FORM_ENDPOINT)setV({name:"",email:"",int:"",msg:""})};
+  const sn=async ev=>{ev.preventDefault();setNr(null);if(!EM.test(nl.e)){setNe({e:"Enter a valid email."});return}setNe({});setNb(true);const r=await deliver("Newsletter signup",{Email:nl.e});setNb(false);setNr({...r,id:"n"+Date.now()});if(r.ok&&FORM_ENDPOINT)setNl({e:""})};
+  return html`<section id="contact" class="ct"><div class="bgi" data-px="0.06" aria-hidden="true"><${Img} k="taj"/></div><div class="mand" aria-hidden="true"><${Mandala}/></div><div class="wrap"><div><div class="kick">08 · संपर्क · Contact</div><${H} t="Let's talk *travel."/>
+  <ul>${CONTACT.email&&html`<li>✉ <a href=${"mailto:"+CONTACT.email}>${CONTACT.email}</a></li>`}${CONTACT.phone&&html`<li>☎ <a href=${"tel:"+CONTACT.phone}>${CONTACT.phone}</a></li>`}${CONTACT.address&&html`<li>⌖ ${CONTACT.address}</li>`}${!CONTACT.email&&!CONTACT.phone&&html`<li>Contact details placeholder — add yours in CONTACT.</li>`}</ul>
+  <div class="gl fm"><h3>Travel inspiration, monthly</h3><form class="nlr" onSubmit=${sn} noValidate><${Field} k="e" label="Email" type="email" v=${nl} e=${ne} set=${setNl}/><button class="btn mag" type="submit" disabled=${nb} style=${{marginBottom:20}}>${nb?"Subscribing…":"Subscribe"}</button></form><${Result} r=${nr}/></div></div>
+  <form class="gl fm" onSubmit=${sub} noValidate><div class="fg"><${Field} k="name" label="Name" v=${v} e=${e} set=${setV}/><${Field} k="email" label="Email" type="email" v=${v} e=${e} set=${setV}/>
+   <${Field} k="int" label="Travel interest or destination" v=${v} e=${e} set=${setV} full=${1}/><${Field} k="msg" label="Message" rows="5" v=${v} e=${e} set=${setV} full=${1}/>
+   <div class="f"><button class="btn mag" type="submit" disabled=${busy}>${busy?"Sending…":"Send message →"}</button></div></div><${Result} r=${res}/></form></div></section>`;
+}
+function Footer({onTours,onLegal,onNews}){
+  const L=(a,fn)=>a.map(x=>html`<li key=${x}><a href="#packages" onClick=${e=>{e.preventDefault();fn(x)}}>${x}</a></li>`);
+  return html`<footer><div class="toran" aria-hidden="true"></div><div class="wrap"><div class="fg4"><div><a class="logo" href="#top"><${Logo}/>${BRAND}</a><p style=${{color:"#9bacb6",maxWidth:300}}>Journeys designed around you. Replace with your brand description.</p></div>
+  <div><h4>Destinations</h4><ul>${L(DEST.map(d=>d.n),n=>onTours({q:n}))}</ul></div><div><h4>Travel types</h4><ul>${L(["Adventure","Beach","Culture","Luxury","Family","Food"],c=>onTours({cat:c}))}</ul></div>
+  <div><h4>Connect</h4><ul>${CONTACT.email&&html`<li><a href=${"mailto:"+CONTACT.email}>${CONTACT.email}</a></li>`}${SOCIAL.filter(s=>s.h).map(s=>html`<li key=${s.l}><a href=${s.h} target="_blank" rel="noopener noreferrer">${s.l}</a></li>`)}<li><a href="#contact" onClick=${e=>{e.preventDefault();onNews()}}>Newsletter</a></li></ul></div></div>
+  <div class="mega" aria-hidden="true">${BRAND}</div><p class="hi" style=${{color:"#ffd37a"}}>अतिथि देवो भव <span>— our guest is our god</span></p><p class="cr">Photo credits — ${CREDITS}</p>
+  <div class="fb2"><span>© ${new Date().getFullYear()} ${BRAND}. All rights reserved.</span><span><a href="#" onClick=${e=>{e.preventDefault();onLegal("Privacy Policy")}}>Privacy Policy</a> · <a href="#" onClick=${e=>{e.preventDefault();onLegal("Terms of Service")}}>Terms</a></span></div></div></footer>`;
+}
+function App(){
+  const [search,setSearch]=useState({q:"",d:"",r:"",n:"2",on:false}),[cat,setCat]=useState("All"),[trip,setTrip]=useState([]),[legal,setLegal]=useState(null);
+  const sc=id=>setTimeout(()=>{const el=document.getElementById(id);el&&el.scrollIntoView({behavior:RM?"auto":"smooth"})},60);
+  const tours=({q="",cat:c="All"})=>{setSearch(s=>({...s,q,d:"",r:"",on:false}));setCat(c);sc("packages")};
+  const clear=()=>{setSearch(s=>({...s,q:"",d:"",r:"",on:false}));setCat("All")};
+  const add=(k,toggle)=>setTrip(t=>t.includes(k)?(toggle?t.filter(x=>x!==k):t):[...t,k]);
+  const move=(i,d)=>setTrip(t=>{const a=[...t],j=i+d;if(j<0||j>=a.length)return t;[a[i],a[j]]=[a[j],a[i]];return a});
+  useEffect(()=>{
+    const prog=document.getElementById("prog"),cur=document.getElementById("cur");let raf=0;
+    const sc2=()=>{if(raf)return;raf=requestAnimationFrame(()=>{raf=0;prog.style.setProperty("--p",(scrollY/(document.documentElement.scrollHeight-innerHeight)*100||0)+"%");if(!RM)document.querySelectorAll("[data-px]").forEach(el=>{const r=el.getBoundingClientRect();el.style.transform=`translateY(${(r.top+r.height/2-innerHeight/2)*-el.dataset.px}px)`})})};
+    const mv=e=>{if(TOUCH)return;cur.style.transform=`translate(${e.clientX}px,${e.clientY}px)`;const t=e.target.closest&&e.target.closest("[data-cur]");const lab=t&&t.dataset.cur;cur.classList.toggle("big",!!lab);cur.textContent=lab||"";
+      const m=e.target.closest&&e.target.closest(".mag");document.querySelectorAll(".mag.on").forEach(x=>{if(x!==m){x.style.transform="";x.classList.remove("on")}});
+      if(m&&!RM&&!m.disabled){const r=m.getBoundingClientRect();m.style.transform=`translate(${(e.clientX-r.left-r.width/2)*.22}px,${(e.clientY-r.top-r.height/2)*.32}px)`;m.classList.add("on")}};
+    addEventListener("scroll",sc2,{passive:true});addEventListener("mousemove",mv);sc2();
+    return()=>{removeEventListener("scroll",sc2);removeEventListener("mousemove",mv)};
+  },[]);
+  return html`<${Header}/><main><${Hero} onSearch=${v=>{setSearch({...v,on:true});setCat("All");sc("packages")}}/><${Destinations} onAdd=${k=>add(k,true)} trip=${trip} onTours=${n=>tours({q:n})}/><${Experiences} onPick=${c=>tours({cat:c})}/><${Packages} search=${search} setSearch=${setSearch} cat=${cat} setCat=${setCat} clear=${clear} onAdd=${k=>add(k)}/><${Builder} trip=${trip} onAdd=${add} move=${move} setTrip=${setTrip} search=${search}/><${Why}/><${Stories}/><${Gallery}/><${Contact}/></main>
+  <${Footer} onTours=${tours} onLegal=${setLegal} onNews=${()=>{sc("contact");setTimeout(()=>{const i=document.getElementById("f-e");i&&i.focus()},700)}}/>
+  ${legal&&html`<${Modal} label=${legal} onClose=${()=>setLegal(null)}><h3 style=${{fontSize:32,marginBottom:14}}>${legal}</h3><p>This is placeholder text. Replace it with your real ${legal.toLowerCase()} before launching the site.</p><p class="nt">Nothing here is legal advice or a real policy.</p><button class="btn" onClick=${()=>setLegal(null)}>Close</button></${Modal}>`}`;
+}
+ReactDOM.createRoot(document.getElementById("root")).render(html`<${App}/>`);
+</script>
+</body>
+</html>
